@@ -10,5 +10,32 @@ package Modelo;
  * @author ArtemSupa
  */
 public class Login {
+    String L_Correo;
+    String L_Password;
+
+    public Login() {
+    }
+
+    public Login(String L_Correo, String L_Password) {
+        this.L_Correo = L_Correo;
+        this.L_Password = L_Password;
+    }
+
+    public String getL_Correo() {
+        return L_Correo;
+    }
+
+    public void setL_Correo(String L_Correo) {
+        this.L_Correo = L_Correo;
+    }
+
+    public String getL_Password() {
+        return L_Password;
+    }
+
+    public void setL_Password(String L_Password) {
+        this.L_Password = L_Password;
+    }
+    
     
 }

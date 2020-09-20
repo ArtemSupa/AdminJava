@@ -4,7 +4,13 @@
  * and open the template in the editor.
  */
 package Vista;
-
+import Conexion.BD;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import Modelo.Login;
+import Controlador.Clases;
+import java.sql.Connection;
 /**
  *
  * @author ArtemSupa
@@ -27,21 +33,75 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jPanel1 = new javax.swing.JPanel();
+        txt_correo = new javax.swing.JTextField();
+        txt_contrasena = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 762, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 475, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        txt_correo.setToolTipText("");
+        jPanel1.add(txt_correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 150, 160, 30));
+
+        txt_contrasena.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_contrasenaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txt_contrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 200, 160, 30));
+
+        jButton1.setText("Login");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 270, -1, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/fondo-degradado-tonos-verdes_23-2148373476.jpg"))); // NOI18N
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-1, 0, 630, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txt_contrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_contrasenaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_contrasenaActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        Clases cl = new Clases();
+        Login lg = new Login();
+        String TraerCajatexto1;
+        String TraerCajatexto2;
+        TraerCajatexto1 =txt_correo.getText();
+        TraerCajatexto2 = txt_contrasena.getText();
+        lg.setL_Correo(TraerCajatexto1);
+        lg.setL_Password(TraerCajatexto2);
+        
+        BD b = new BD();
+        try {
+            
+           
+            b.ConexionBDOracle11g();
+            cl.Procedure_Login_select(lg);
+
+            
+            System.out.println("Correcto");
+        } catch (SQLException ex) {
+            Logger.getLogger(MenuPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +139,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField txt_contrasena;
+    private javax.swing.JTextField txt_correo;
     // End of variables declaration//GEN-END:variables
 }
